@@ -36,16 +36,9 @@ L.control.layers(baseMaps).addTo(map);
 let airportData = "https://raw.githubusercontent.com/XZandermarsh/Earthquakes/main/majorAirports.json";
 
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data)  {
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data)  {
     console.log(data);
-    L.geoJson(data,  {
-        // We turn each feature into a marker on the map.
-        onEachFeature: function(feature, layer) {
-          console.log(layer);
-          layer
-          .bindPopup("<h2>" + feature.properties.name + "</h2>" + "<h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
-        }
-    }).addTo(map)
+    L.geoJson(data).addTo(map)
 });
 
 // Then we add our 'graymap' tile layer to the map.
